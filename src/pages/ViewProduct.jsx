@@ -11,9 +11,15 @@ const ViewProduct = () => {
   const { id } = useParams();
 
   const [productInfo, setProductInfo] = useState();
+  const [qty, setQty] = useState(1);
+
+  const getProductDetails = async () => {
+    const response = await getProuctById(id);
+    setProductInfo(response?.data);
+  };
 
   const addToCart = async () => {
-    const res = await addProductToCart();
+    const res = await addProductToCart(id, qty);
 
     if (res?.status === 200) {
       alert("Cart is Updated");
@@ -23,13 +29,7 @@ const ViewProduct = () => {
   };
 
   useEffect(() => {
-    console.log(id);
-    const res = async () => {
-      const response = await getProuctById(id);
-      console.log(response?.data);
-      setProductInfo(response?.data);
-    };
-    res();
+    getProductDetails();
   }, []);
 
   return (
@@ -54,7 +54,12 @@ const ViewProduct = () => {
           <label>
             <b>Quantity: </b>{" "}
           </label>
-          <input type="number" defaultValue="1"></input>
+          <input
+            type="number"
+            value={qty}
+            onChange={(e) => setQty(e?.target?.value)}
+          ></input>
+
           <button
             type="button"
             className="btn btn-primary cart"

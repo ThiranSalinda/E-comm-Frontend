@@ -5,13 +5,13 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <a className="navbar-brand" href="#">
           Smart Shop
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -19,26 +19,26 @@ const Header = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
               <a
-                class="nav-link"
+                className="nav-link"
                 aria-current="page"
                 onClick={() => navigate("/")}
               >
                 Home
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick={() => navigate("/cart")}>
+            <li className="nav-item">
+              <a className="nav-link" onClick={() => navigate("/cart")}>
                 Cart
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick={() => navigate("/manage")}>
+            <li className="nav-item">
+              <a className="nav-link" onClick={() => navigate("/manage")}>
                 Manage Products
               </a>
             </li>

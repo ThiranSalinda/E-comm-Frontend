@@ -1,10 +1,10 @@
 import { api } from "./api";
 
-export const addProductToCart = async () => {
+export const addProductToCart = async (productId, qty) => {
   return await api()
     .post("cart", {
-      productId: "6382071c5ce434fcb9b65f41",
-      quantity: 9,
+      productId: productId,
+      quantity: qty,
     })
     .then((result) => {
       return result;
