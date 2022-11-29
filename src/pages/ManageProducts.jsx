@@ -2,24 +2,32 @@ import React, { useEffect, useState } from "react";
 import "../style/ManageProducts.css";
 import { useNavigate } from "react-router-dom";
 
-import { getProducts } from "../Api/products.service";
+import { addProduct, getProducts } from "../Api/products.service";
 
 const Products = () => {
   const navigate = useNavigate();
 
-  const [productList, setProductList] = useState([]);
+  const [title, setTitle] = useState("");
+  const [dese, setDese] = useState("");
+  const [price, setPrice] = useState("");
 
-  useEffect(() => {
-    const res = async () => {
-      const response = await getProducts();
-      // console.log(response?.data);
-      setProductList(response?.data);
+  const handleSubmit = async () => {
+    const data = {
+      title,
+      dese,
+      price,
     };
 
-    res();
+    const response = await addProduct(data);
 
-    console.log(productList);
-  }, []);
+    if (response?.status === 200) {
+      alert("Success");
+    } else {
+      alert("Error");
+    }
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="product">
@@ -28,32 +36,48 @@ const Products = () => {
         {/* <Link to="/newproduct">
           <button className="productAddButton">Create</button>
         </Link> */}
-
-        <button className="productAddButton">Create</button>
       </div>
 
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder="Product Name" />
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={title}
+              onChange={(e) => {
+                setTitle(e?.target?.value);
+              }}
+            />
             <label>Product Description</label>
-            <input type="text" placeholder="Product Description" />
+            <input
+              type="text"
+              placeholder="Product Description"
+              value={dese}
+              onChange={(e) => {
+                setDese(e?.target?.value);
+              }}
+            />
             <label>Price</label>
-            <input type="text" placeholder="Price" />
+            <input
+              type="text"
+              placeholder="Price"
+              value={price}
+              onChange={(e) => {
+                setPrice(e?.target?.value);
+              }}
+            />
+
+            <button
+              className="productAddButton"
+              type="button"
+              onClick={handleSubmit}
+            >
+              Create
+            </button>
           </div>
           <div className="productFormRight">
-            <div className="productUpload">
-              <img src="{product.img}" alt="" className="productUploadImg" />
-              <div class="mb-3">
-                <label for="formFile" class="form-label">
-                  Please Select the Image
-                </label>
-                <input class="form-control" type="file" id="formFile"></input>
-              </div>
-              <label for="file">{/* <Publish /> */}</label>
-              <input type="file" id="file" style={{ display: "none" }} />
-            </div>
             <button className="productButton">Update</button>
             <button className="productButton2">Delete</button>
           </div>

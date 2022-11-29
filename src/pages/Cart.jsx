@@ -1,25 +1,35 @@
 import React, { useEffect } from "react";
 import "../style/Cart.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getCartDetailsById } from "../Api/products.service";
+import { deleteProductInCart, getAllProductInCart } from "../Api/cart.service";
 
 const Cart = () => {
   const navigate = useNavigate();
 
   const [cartList, setCartList] = useState([]);
 
-  useEffect(() => {
-    const res = async () => {
-      const response = await getCartDetailsById();
-      // console.log(response?.data);
+  const getCartProducts = async () => {
+    const response = await getAllProductInCart();
+    if (response?.status === 200) {
+      console.log(response?.data);
       setCartList(response?.data);
-    };
+    } else {
+      alert("Something went wrong.");
+    }
+  };
 
-    res();
+  const removeCartItem = async (productId) => {
+    const response = await deleteProductInCart(productId);
+    if (response?.status === 200) {
+      getCartProducts();
+    } else {
+      alert("Something went wrong.");
+    }
+  };
 
-    console.log(cartList);
+  useEffect(() => {
+    getCartProducts();
   }, []);
 
   return (
@@ -37,27 +47,35 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#">
-                  <i class="bi bi-x-circle-fill"></i>
-                </a>
-              </td>
-              <td>
-                <img src="" class="img-thumbnail" alt="..."></img>
-              </td>
-              <td>{cartList?.title}</td>
-              <td>$550.00</td>
-              <td>
-                <input type="number" defaultValue="1"></input>
-              </td>
-              <td>$550.00</td>
-            </tr>
+            {cartList?.map((cart, key) => {
+              return (
+                <tr key={key}>
+                  <td>
+                    {/* <i className="bi bi-x-circle-fill"></i> */}
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => removeCartItem(cart?._id)}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                  <td>
+                    <img src="" className="img-thumbnail" alt="..."></img>
+                  </td>
+                  <td>{cart?.title}</td>
+                  <td>LKR {cart?.price}</td>
+                  <td>
+                    <input type="number" value={cart?.quantity}></input>
+                  </td>
+                  <td>$550.00</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </section>
 
-      <section id="cart-add" className="section-p1">
+      <section id="cart-add" className="section-p1 mt-5">
         <div id="subtotal">
           <h3 className="text-center">Cart Totals</h3>
           <table>

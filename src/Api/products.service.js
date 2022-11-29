@@ -24,11 +24,11 @@ export const getProuctById = async (prouctId) => {
     });
 };
 
-//getCartDetailsById
+//manageProducts
 
-export const getCartDetailsById = async (prouctId) => {
+export const manageProducts = async () => {
   return await api()
-    .get(`product/find/${prouctId}`)
+    .get("product")
     .then((result) => {
       return result;
     })
@@ -37,11 +37,9 @@ export const getCartDetailsById = async (prouctId) => {
     });
 };
 
-//manageProducts
-
-export const manageProducts = async () => {
+export const addProduct = async (data) => {
   return await api()
-    .get("product")
+    .post("product", data)
     .then((result) => {
       return result;
     })

@@ -22,7 +22,7 @@ input {
   font-weight: bold;
   height: 33px;
   text-align: center;
-  width: 30px;
+  /* width: 30px; */
 }
 
 .cart {
