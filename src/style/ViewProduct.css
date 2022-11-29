@@ -1,0 +1,31 @@
+.newarrival {
+  background: green;
+  width: 50px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.col-md-7 {
+  color: #555;
+}
+
+.Price {
+  color: #fe980f;
+  font-size: 26px;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-weight: bold;
+  height: 33px;
+  text-align: center;
+  width: 30px;
+}
+
+.cart {
+  font-size: 15px;
+  margin-left: 20px;
+}

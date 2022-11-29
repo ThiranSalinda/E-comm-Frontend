@@ -1,16 +1,10 @@
-import axios from "axios";
+import { api } from "./api";
 
-export const api = () => {
-  return axios.create({
-    baseURL: "http://localhost:8080/api/",
-  });
-};
-
-export const getProucts = async () => {
+//Get all products
+export const getProducts = async () => {
   return await api()
     .get("product")
     .then((result) => {
-      //   console.log(result);
       return result;
     })
     .catch((err) => {
@@ -19,3 +13,39 @@ export const getProucts = async () => {
 };
 
 // getProuctById
+export const getProuctById = async (prouctId) => {
+  return await api()
+    .get(`product/find/${prouctId}`)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//getCartDetailsById
+
+export const getCartDetailsById = async (prouctId) => {
+  return await api()
+    .get(`product/find/${prouctId}`)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//manageProducts
+
+export const manageProducts = async () => {
+  return await api()
+    .get("product")
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

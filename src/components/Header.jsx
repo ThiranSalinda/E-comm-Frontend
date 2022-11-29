@@ -33,12 +33,12 @@ const Header = () => {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" onClick={() => navigate("/cart")}>
+              <a class="nav-link" onClick={() => navigate("/cart")}>
                 Cart
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onClick={() => navigate("")}>
+              <a class="nav-link" onClick={() => navigate("/manage")}>
                 Manage Products
               </a>
             </li>

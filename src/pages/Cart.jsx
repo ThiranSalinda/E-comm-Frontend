@@ -1,58 +1,30 @@
 import React, { useEffect } from "react";
+import "../style/Cart.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { getCartDetailsById } from "../Api/products.service";
 
 const Cart = () => {
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://localhost:8080/api/cart",
-  //     // responseType: 'stream'
-  //   }).then(function (response) {
-  //     console.log(response);
-  //   });
-  // }, []);
+  const navigate = useNavigate();
+
+  const [cartList, setCartList] = useState([]);
+
+  useEffect(() => {
+    const res = async () => {
+      const response = await getCartDetailsById();
+      // console.log(response?.data);
+      setCartList(response?.data);
+    };
+
+    res();
+
+    console.log(cartList);
+  }, []);
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Smart Shop
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  Cart
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Manage Products
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <section id="cart" class="section-p1">
+      <section id="cart" className="section-p1">
         <table width="100%">
           <thead>
             <tr>
@@ -67,15 +39,17 @@ const Cart = () => {
           <tbody>
             <tr>
               <td>
-                <a href="#"></a>
+                <a href="#">
+                  <i class="bi bi-x-circle-fill"></i>
+                </a>
               </td>
               <td>
-                <img src="../images/p1.jpg" alt=""></img>
+                <img src="" class="img-thumbnail" alt="..."></img>
               </td>
-              <td>Apple 14 Pro</td>
+              <td>{cartList?.title}</td>
               <td>$550.00</td>
               <td>
-                <input type="number" value="1"></input>
+                <input type="number" defaultValue="1"></input>
               </td>
               <td>$550.00</td>
             </tr>
@@ -83,9 +57,9 @@ const Cart = () => {
         </table>
       </section>
 
-      <section id="cart-add" class="section-p1">
+      <section id="cart-add" className="section-p1">
         <div id="subtotal">
-          <h3 class="text-center">Cart Totals</h3>
+          <h3 className="text-center">Cart Totals</h3>
           <table>
             <tr>
               <td>Cart Subtotal</td>
@@ -108,7 +82,7 @@ const Cart = () => {
               </td>
             </tr>
           </table>
-          <button class="normal">Proceed to checkout</button>
+          <button className="normal">Proceed to checkout</button>
         </div>
       </section>
     </div>
