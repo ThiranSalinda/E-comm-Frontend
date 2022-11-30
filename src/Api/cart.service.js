@@ -37,3 +37,16 @@ export const deleteProductInCart = async (productId) => {
       console.log(err);
     });
 };
+
+//delete product in cart
+
+export const deleteAllProductInCart = async () => {
+  return await api()
+    .delete(`cart`)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

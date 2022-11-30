@@ -2,18 +2,22 @@ import React, { useEffect } from "react";
 import "../style/Cart.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { deleteProductInCart, getAllProductInCart } from "../Api/cart.service";
+import {
+  deleteAllProductInCart,
+  deleteProductInCart,
+  getAllProductInCart,
+} from "../Api/cart.service";
 
 const Cart = () => {
   const navigate = useNavigate();
 
-  const [cartList, setCartList] = useState([]);
+  const [cartData, setCartData] = useState(null);
 
   const getCartProducts = async () => {
     const response = await getAllProductInCart();
     if (response?.status === 200) {
       console.log(response?.data);
-      setCartList(response?.data);
+      setCartData(response?.data);
     } else {
       alert("Something went wrong.");
     }
@@ -21,6 +25,15 @@ const Cart = () => {
 
   const removeCartItem = async (productId) => {
     const response = await deleteProductInCart(productId);
+    if (response?.status === 200) {
+      getCartProducts();
+    } else {
+      alert("Something went wrong.");
+    }
+  };
+
+  const removeAllCartItem = async () => {
+    const response = await deleteAllProductInCart();
     if (response?.status === 200) {
       getCartProducts();
     } else {
@@ -39,7 +52,6 @@ const Cart = () => {
           <thead>
             <tr>
               <td>Remove</td>
-              <td>Image</td>
               <td>Product</td>
               <td>Price</td>
               <td>Quantity</td>
@@ -47,33 +59,41 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {cartList?.map((cart, key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    {/* <i className="bi bi-x-circle-fill"></i> */}
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => removeCartItem(cart?._id)}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                  <td>
-                    <img src="" className="img-thumbnail" alt="..."></img>
-                  </td>
-                  <td>{cart?.title}</td>
-                  <td>LKR {cart?.price}</td>
-                  <td>
-                    <input type="number" value={cart?.quantity}></input>
-                  </td>
-                  <td>$550.00</td>
-                </tr>
-              );
-            })}
+            {cartData?.items?.length > 0 ? (
+              cartData?.items?.map((cart, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      {/* <i className="bi bi-x-circle-fill"></i> */}
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeCartItem(cart?._id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                    <td>{cart?.product?.title}</td>
+                    <td>LKR {cart?.product?.price}</td>
+                    <td>
+                      <input
+                        type="number"
+                        value={cart?.quantity}
+                        style={{ maxWidth: "100%" }}
+                      ></input>
+                    </td>
+                    <td>LKR {cart?.product?.price * cart?.quantity * 1}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <p className="text-center mt-3 mb-5">No items</p>
+            )}
           </tbody>
         </table>
       </section>
+      <button className="btn btn-danger " onClick={() => removeAllCartItem()}>
+        Remove All
+      </button>
 
       <section id="cart-add" className="section-p1 mt-5">
         <div id="subtotal">
@@ -81,22 +101,22 @@ const Cart = () => {
           <table>
             <tr>
               <td>Cart Subtotal</td>
-              <td>LKR 550</td>
+              <td>LKR {cartData?.subTotal ?? 0}</td>
             </tr>
             <tr>
               <td>Tax (1.23%)</td>
-              <td>LKR 560</td>
+              <td>LKR {cartData?.taxTotal ?? 0}</td>
             </tr>
             <tr>
               <td>Shipping</td>
-              <td>LKR 500</td>
+              <td>LKR {cartData?.shippingCost ?? 0}</td>
             </tr>
             <tr>
               <td>
                 <strong>Total</strong>
               </td>
               <td>
-                <strong>LKR 1010</strong>
+                <strong>LKR {cartData?.totalCost ?? 0}</strong>
               </td>
             </tr>
           </table>

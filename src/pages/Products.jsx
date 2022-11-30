@@ -27,8 +27,7 @@ const Products = () => {
       <div className="row mt-4">
         {productList?.map((product, key) => {
           return (
-            <div className="col-lg-3">
-              <img src="" class="img-thumbnail" alt="..."></img>
+            <div className="col-lg-3 pb-5">
               <h4>{product?.title}</h4>
               <h5>LKR{product?.price ?? 0}</h5>
               <p>{product?.dese}</p>
