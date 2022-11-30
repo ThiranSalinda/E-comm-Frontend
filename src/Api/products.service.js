@@ -47,3 +47,14 @@ export const addProduct = async (data) => {
       console.log(err);
     });
 };
+
+export const addJson = async () => {
+  return await api()
+    .get("product/add-json-products")
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

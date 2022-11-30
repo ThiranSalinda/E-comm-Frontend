@@ -74,13 +74,7 @@ const Cart = () => {
                     </td>
                     <td>{cart?.product?.title}</td>
                     <td>LKR {cart?.product?.price}</td>
-                    <td>
-                      <input
-                        type="number"
-                        value={cart?.quantity}
-                        style={{ maxWidth: "100%" }}
-                      ></input>
-                    </td>
+                    <td>{cart?.quantity}</td>
                     <td>LKR {cart?.product?.price * cart?.quantity * 1}</td>
                   </tr>
                 );
@@ -91,7 +85,11 @@ const Cart = () => {
           </tbody>
         </table>
       </section>
-      <button className="btn btn-danger " onClick={() => removeAllCartItem()}>
+      <button
+        id="remove"
+        className="btn btn-danger "
+        onClick={() => removeAllCartItem()}
+      >
         Remove All
       </button>
 

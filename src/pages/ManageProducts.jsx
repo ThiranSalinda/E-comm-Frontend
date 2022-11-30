@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../style/ManageProducts.css";
 import { useNavigate } from "react-router-dom";
 
-import { addProduct, getProducts } from "../Api/products.service";
+import { addJson, addProduct, getProducts } from "../Api/products.service";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -27,6 +27,15 @@ const Products = () => {
     }
   };
 
+  const addJsonProducts = async () => {
+    const res = await addJson();
+    if (res?.status === 200) {
+      alert("Successfully Added Json Products.");
+    } else {
+      alert("Error");
+    }
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -38,6 +47,13 @@ const Products = () => {
         </Link> */}
       </div>
 
+      <button
+        className="btn btn-success my-4"
+        type="button"
+        onClick={addJsonProducts}
+      >
+        Add Json Products
+      </button>
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
@@ -76,10 +92,6 @@ const Products = () => {
             >
               Create
             </button>
-          </div>
-          <div className="productFormRight">
-            <button className="productButton">Update</button>
-            <button className="productButton2">Delete</button>
           </div>
         </form>
       </div>

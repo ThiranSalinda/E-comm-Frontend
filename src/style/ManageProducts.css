@@ -1,6 +1,7 @@
 .product {
   flex: 4;
   padding: 20px;
+  margin-left: 400px;
 }
 
 .productTitleContainer {
@@ -20,22 +21,6 @@
   cursor: pointer;
 }
 
-.productTop {
-  display: flex;
-}
-
-.productTopLeft,
-.productTopRight {
-  flex: 1;
-}
-
-.productTopRight {
-  padding: 20px;
-  margin: 20px;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-}
-
 .productInfoImg {
   width: 40px;
   height: 40px;
@@ -50,7 +35,7 @@
 }
 
 .productName {
-  font-weight: 600;
+  font-weight: 13px;
 }
 
 .productInfoBottom {
@@ -64,10 +49,11 @@
 }
 
 .productInfoValue {
-  font-weight: 300;
+  font-weight: 13px;
 }
 
 .productBottom {
+  max-width: fit-content;
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -86,12 +72,11 @@
 
 .productFormLeft > label {
   margin-bottom: 10px;
-  color: gray;
+  color: rgb(0, 0, 0);
 }
 
 .productFormLeft > input {
   margin-bottom: 10px;
-  border: none;
   padding: 5px;
   border-bottom: 1px solid gray;
 }
@@ -124,18 +109,6 @@
   padding: 5px;
   border-radius: 5px;
   background-color: darkblue;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100px;
-  margin-left: 300px;
-}
-
-.productButton2 {
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: rgb(201, 0, 0);
   color: white;
   font-weight: 600;
   cursor: pointer;
