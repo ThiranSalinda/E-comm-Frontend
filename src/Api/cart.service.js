@@ -50,3 +50,18 @@ export const deleteAllProductInCart = async () => {
       console.log(err);
     });
 };
+
+//save cart order
+
+export const saveCartOrder = async (totalCost) => {
+  return await api()
+    .post(`order`, {
+      totalCost,
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

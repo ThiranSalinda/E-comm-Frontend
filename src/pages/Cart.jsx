@@ -6,6 +6,7 @@ import {
   deleteAllProductInCart,
   deleteProductInCart,
   getAllProductInCart,
+  saveCartOrder,
 } from "../Api/cart.service";
 
 const Cart = () => {
@@ -39,6 +40,14 @@ const Cart = () => {
     } else {
       alert("Something went wrong.");
     }
+  };
+
+  const savedOrder = async () => {
+    const res = await saveCartOrder(cartData?.totalCost);
+    if (res?.status === 200) {
+      alert("Order placed Successfully!.");
+      getCartProducts();
+    } else alert("Something went wrong.");
   };
 
   useEffect(() => {
@@ -118,7 +127,9 @@ const Cart = () => {
               </td>
             </tr>
           </table>
-          <button className="normal">Proceed to checkout</button>
+          <button className="normal" onClick={savedOrder}>
+            Proceed to checkout
+          </button>
         </div>
       </section>
     </div>

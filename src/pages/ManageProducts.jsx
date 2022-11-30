@@ -48,6 +48,7 @@ const Products = () => {
       </div>
 
       <button
+        id="json"
         className="btn btn-success my-4"
         type="button"
         onClick={addJsonProducts}
